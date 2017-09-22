@@ -15,15 +15,17 @@ unlink(temp)
 
 
 ## subset data to dates 2007-02-01 and 2007-02-02
+## subset data to dates 2007-02-01 and 2007-02-02
 dt <- paste(as.character(data$Date), 
             as.character(data$Time))
-#data <- cbind(data,dt)
-data$dt <- with(data, as.POSIXct(dt, format="%d-%m-%Y %H:%M:%S"))
+data$dt <- with(data, as.POSIXct(dt, format="%d/%m/%Y %H:%M:%S"))
 
 data$Date <-(as.Date(data$Date, format = "%d/%m/%Y", tz = ""))
 filt <- filter(data, Date == "2007-02-01"|Date == "2007-02-02")
 filt$Global_active_power <- as.numeric(as.character(filt$Global_active_power))
-
+filt$Sub_metering_1 <- as.numeric(as.character(filt$Sub_metering_1))
+filt$Sub_metering_2 <- as.numeric(as.character(filt$Sub_metering_2))
+filt$Sub_metering_3 <- as.numeric(as.character(filt$Sub_metering_3))
 
 ##create plot
 
